@@ -64,17 +64,29 @@ public class Ejercicio1 {
 	}
 	
 	public static String recFinal(Integer varA, Integer varB) {
-		return recFinalAux(EnteroCadena.of(varA, "A"), "", varA, varB);
-			
-	}
-	
-	public static String recFinalAux(EnteroCadena elem, String ac, Integer varA, Integer varB) {
-		
-	}
-	
-	
-	
-	
+        return recFinalAux(EnteroCadena.of(varA, "A"), "", varA, varB);
+    }
+
+    public static String recFinalAux(EnteroCadena elem, String ac, Integer varA, Integer varB) {
+        // Caso base: se interrumpe la recursión cuando elem.a() >= varB
+        if (elem.a() >= varB) {
+            return ac;
+        }
+
+        // 1. Filtrado (elem.a() % 10 != 0) y actualización del acumulador
+        String nuevoAc = ac;
+        if (elem.a() % 10 != 0) {
+            nuevoAc = ac.isEmpty() ? elem.s() : ac + "-" + elem.s();
+        }
+
+        // 2. Cálculo del siguiente estado (UnaryOperator nx)
+        int siguienteA = elem.a() + 3;
+        String siguienteS = (elem.a() % 2 == 0) ? elem.a() + "*" : elem.a() + "!";
+        EnteroCadena siguienteElem = EnteroCadena.of(siguienteA, siguienteS);
+
+        // 3. Llamada recursiva final
+        return recFinalAux(siguienteElem, nuevoAc, varA, varB);
+    }
 	
 	
 
