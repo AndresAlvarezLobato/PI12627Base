@@ -88,7 +88,39 @@ public class Ejercicio1 {
         return recFinalAux(siguienteElem, nuevoAc, varA, varB);
     }
 	
-	
+	//extra: version recursiva NO final!
+    
+    public static String recNoFinal(Integer varA, Integer varB) {
+        return recNoFinalAux(EnteroCadena.of(varA, "A"), varB);
+    }
+
+    private static String recNoFinalAux(EnteroCadena elem, Integer varB) {
+        // 1. Caso Base: Se interrumpe la recursión cuando elem.a() >= varB
+        if (elem.a() >= varB) {
+            return "";
+        }
+
+        // 2. Cálculo del siguiente estado (UnaryOperator nx)
+        int siguienteA = elem.a() + 3;
+        String siguienteS = (elem.a() % 2 == 0) ? elem.a() + "*" : elem.a() + "!";
+        EnteroCadena siguienteElem = EnteroCadena.of(siguienteA, siguienteS);
+
+        // 3. Llamada recursiva hacia el RESTO de la secuencia (NO es la última operación)
+        String resto = recNoFinalAux(siguienteElem, varB);
+
+        // 4. COMBINACIÓN POST-RECURSIVA (Al regresar de la llamada):
+        // Verificamos si el elemento actual pasa el filtro (% 10 != 0)
+        if (elem.a() % 10 != 0) {
+            if (resto.isEmpty()) {
+                return elem.s();
+            } else {
+                return elem.s() + "-" + resto;
+            }
+        } else {
+            // Si no cumple el filtro, ignoramos elem.s() y devolvemos solo lo que traiga el resto
+            return resto;
+        }
+    }
 
 
 }
