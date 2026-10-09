@@ -18,8 +18,21 @@ public class Ejercicio2 {
 		return res;
 	}
 	
-	public static List<String> ejercicio2Iterativo(Integer a, String s){
-		return null;
+		public static List<String> ejercicio2Iterativo(Integer a, String s){
+		List<String> ac = new ArrayList<>();
+		while (!(a <= 2 || s.length() <= 2)) {
+			if (a%2==0) {
+				ac.add(a.toString());
+				a/=2;
+				s = s.substring(0, s.length() - 2);
+			} else {
+				ac.add(a.toString() + s.substring(0, a%s.length()));
+				a/=3;
+				s = s.substring(0, s.length() - 1);
+			}
+		}
+		ac.add(a.toString() + s);
+		return ac;
 	}
 	
 	public static List<String> ejercicio2RecursivoFinal(Integer a, String s) {
