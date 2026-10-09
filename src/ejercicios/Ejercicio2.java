@@ -5,7 +5,17 @@ import java.util.List;
 
 public class Ejercicio2 {
 	public static List<String> ejercicio2RecursivoNoFinal(Integer a, String s){
-		return null;
+		List<String> res = new ArrayList<>();
+		if (a <= 2 || s.length() <= 2) {
+			res.add(a.toString() + s);
+		} else if (a%2==0) {
+			res = ejercicio2RecursivoNoFinal(a/2, s.substring(0, s.length() - 2));
+			res.add(a.toString());
+		} else {
+			res = ejercicio2RecursivoNoFinal(a/3, s.substring(0, s.length() - 1));
+			res.add((a.toString() + s.substring(0, a%s.length())));
+		}
+		return res;
 	}
 	
 	public static List<String> ejercicio2Iterativo(Integer a, String s){
