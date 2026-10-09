@@ -18,7 +18,7 @@ public class Ejercicio2 {
 		return res;
 	}
 	
-		public static List<String> ejercicio2Iterativo(Integer a, String s){
+	public static List<String> ejercicio2Iterativo(Integer a, String s){
 		List<String> ac = new ArrayList<>();
 		while (!(a <= 2 || s.length() <= 2)) {
 			if (a%2==0) {
