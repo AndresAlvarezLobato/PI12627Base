@@ -66,6 +66,29 @@ public class Ejercicio3 {
 	}
 	
 	public static Set<Integer> ejercicio3Iterativo(Integer a, Integer b, Integer c) {
-		return null;
+		Map<Tupla, Set<Integer>> map = new HashMap<>();
+		for (int i = 0; i <= a; i++) {
+	        for (int j = 0; j <= b; j++) {
+	            for (int k = 0; k <= c; k++) {
+	                Set<Integer> res = new HashSet<>();
+	                if (i <= 5 || j <= 3 || k <= 2) {
+	                    res.add(i + 2);
+	                    res.add(j * 3);
+	                    res.add(k);
+	                } else if (i <= 8 || j <= 6 || k <= 4) {
+	                    res.add(i);
+	                    res.add(j + 2);
+	                    res.add(k * 3);
+	                } else {
+	                    Set<Integer> s1 = map.get(Tupla.of(i / 2, j - 3, k / 4));
+	                    Set<Integer> s2 = map.get(Tupla.of(i - 3, j / 3, k - 2));           
+	                    res.addAll(s1);
+	                    res.addAll(s2);
+	                }          
+	                map.put(Tupla.of(i, j, k), res);             
+	            }
+	        }
+		}
+		return map.get(Tupla.of(a, b, c));	
 	}
 }
